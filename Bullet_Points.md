@@ -1,4 +1,5 @@
 # Head First Java Bullet Points
+
 ### Chapter 1
 - Statements end in a semicolon `;`
 - Code blocks are defined by a pair of curly braces `{}`
