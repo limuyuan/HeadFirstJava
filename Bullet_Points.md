@@ -336,3 +336,36 @@ sock.getInputStream();
 - Every object has a single lock, with a single key for that lock. Most of the time we don't care about that lock; locks come in to play only when an object has `synchronized` methods.
 - When a thread attempts to enter a synchronized method, the thread must get the key for the object(the object whose method the thread is trying to run). If the key is not available(because another thread already has it), the thread goes into a kind of waiting lounge, until the key becomes available.
 - Even if an object has more than one `synchronized` method, there is still only one key. Once any thread has entered a `synchronized` method on that object, no thread can enter any other `synchronized` method on the same object. This restriction lets you protect your data by synchronizing any method that manipulates the data.
+
+
+### Chapter 16
+
+> Note: This chapter doesn't have Bullet Points. Weird. Collected by myself:
+
+- The `Collections.sort()` method sorts a list of Strings alphabetically.
+- With generics, you can create type-safe collections where more problems are caught at compile-time instead of runtime.
+- Without generics, the complier would happily let you put a Pumpkin into an `ArrayList` that was supposed to hold only Cat objects.
+- Think of "E" as a stand-in for "the type of element you want this collection to hold and return."(**E** is for **E** lement):  
+```java
+public class ArrayList<E> extends AbstractList<E> implements List<E> ... {
+  public boolean add(E o)
+  // more code
+}
+```
+- In generics, the keyword `extends` really means "is-a" and works for **BOTH** classes and interfaces.
+- Invoking the one-argument `sort(List o)` method means the list element's `compareTo()` method determines the order. So the elements in the list **MUST** implement the `Comparable` interface.
+- Invoking `sort(List o, Comparator c)` means the list element's `compareTo()` method will **NOT** be called, and the `Comparator`'s `compare()` method will be used instead. That means the elements in the list do **NOT** need to implement the `Comparable` interface.
+- To use a `TreeSet`, one of these thinigs must be true: The elements in the list must be of a type that `implements Comparable` OR You use the `TreeSet`'s overloaded constructor that takes a `Comparator`.
+- Each element in a `Map` is actually TWO objects--a key and a value. You can have duplicate _values_, but NOT duplicate _keys_.
+- When you use a wildcard in your method argument, the compilier will **STOP** you from doing anything that could hurt the list referenced by the method parameter.
+
+##### Java Object Law For `HashCode()` and `equals()`
+
+> The API docs for class `Object` state the rules you **MUST** follow:
+
+- If two objects are equal, they **MUST** have matching hashcodes.
+- If two objects are equal, calling `equals()` on either object **MUST** return `true`. In other words, if `a.equals(b)` then `b.equals(a)`.
+- If two objects have the same hashcode value ,they are **NOT** required to be equal. But if they're equal, they **MUST** have the same hashcode value.
+- So, if you override `equals()`, you **MUST** override `hashCode()`.
+- The default behavior of `hashCode()` is to generate a unique integer for each object on the heap. So if you don't override `hashCode()` in a class, no two objects of that type can **EVER** beconsidered equal.
+- The default behavor of `equals()` is to do an `==` comparison. In other words, to test whether the two references refer to a single object on the heap. So if you don't override `equals()` in a class, no two objects can **EVER** be considered equal since references to two different objects will always contain a different bit pattern. `a.equals(b)` must also mean that `a.hashCode() == b.hashCode()`. But `a.hashCode() == b.hashCode()` does **NOT** have to mean `a.equals(b)`
