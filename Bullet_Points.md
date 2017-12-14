@@ -111,11 +111,11 @@ Dog d = (Dog) x.getObject(aDog);
 - An interface is like a 100% pure abstract class. It defines _only_ abstract methods.
 - Create an interface using the **interface** keyword instead of the word **class**.
 - Implement an interface using the keyword **implements**  
+
 Example:
 ```java
 Dog implements Pet
-```  
-
+```
 
 - Your class can implement multiple interfaces.
 - A class that implements an interface _must_ implement all the methods of the interface, since ___all interface methods are implicitly public and abstract___.
