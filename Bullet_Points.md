@@ -116,12 +116,9 @@ Example:
 ```java
 Dog implements Pet
 ```
-```
-```
-
-- Your class can implement multiple interfaces.
-- A class that implements an interface _must_ implement all the methods of the interface, since ___all interface methods are implicitly public and abstract___.
-- To invoke the superclass version of a method from a subclass that's overridden the method, use the **super** keyword. Example: <code><b>super</b>.runReport();</code>
+* Your class can implement multiple interfaces.
+* A class that implements an interface _must_ implement all the methods of the interface, since ___all interface methods are implicitly public and abstract___.
+* To invoke the superclass version of a method from a subclass that's overridden the method, use the **super** keyword. Example: <code><b>super</b>.runReport();</code>
 
 
 ### Chapter 9
