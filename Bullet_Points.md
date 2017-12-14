@@ -112,9 +112,11 @@ Dog d = (Dog) x.getObject(aDog);
 - Create an interface using the **interface** keyword instead of the word **class**.
 - Implement an interface using the keyword **implements**  
 
-Example:
+Example:  
 ```java
 Dog implements Pet
+```
+```
 ```
 
 - Your class can implement multiple interfaces.
