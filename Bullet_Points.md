@@ -1,5 +1,7 @@
 # Head First Java Bullet Points
+
 ### Chapter 1
+
 - Statements end in a semicolon `;`
 - Code blocks are defined by a pair of curly braces `{}`
 - Declare an _int_ variable with a name and a type: `int x;`
@@ -12,6 +14,7 @@
 
 
 ### Chapter 2
+
 - Object-oriented programming lets you extend a program without having to touch previously-tested, working code.
 - All Java code is defined in a **class**.
 - A class describes how to make an object of that class type. **A class is like a blueprint.**
@@ -25,6 +28,7 @@
 
 
 ### Chapter 3
+
 - Variables come in two flavors: primitive and reference.
 - Variables must always be declared with a name and a type.
 - A primitive variable value is the bits representing the value (5, 'a', true, 3.1416, etc.).
@@ -35,6 +39,7 @@
 
 
 ### Chapter 4
+
 - Classes define what an object knows and what an object does.
 - Things an object knows are its **instance variables** (state).
 - Things an object does are its **methods** (behavior).
@@ -48,6 +53,7 @@
 
 
 ### Chapter 5
+
 - Your Java program should start with a high-level design.
 - Typically you'll write three things when you create a new class:  
 **_prepcode_**  
@@ -66,6 +72,7 @@
 
 
 ### Chapter 6
+
 - **ArrayList** is a class in the Java API.
 - To put something into an ArrayList, use **add()**.
 - To remove something from an ArrayList use **remove()**.
@@ -83,6 +90,7 @@
 
 
 ### Chapter 7
+
 - A subclass _extends_ a super class.
 - A subclass inherits all _public_ instance variables and methods of the superclass, but does not inherit the _private_ instance variables and methods of the superclass.
 - Inherited methods _can_ be overridden; instance variables _cannot_ be overridden (although they can be _redefined_ in the subclass, but that's not the same thing, and there's almost never a need to do it.)
@@ -92,6 +100,7 @@
 - If class B extends A, and C extends B, class B IS-A class A, and class C IS-A class B, and class C also IS-A class A.
 
 ### Chapter 8
+
 - When you don't want a class to be instantiated (in other words, you don't want anyone to make a new object of that class type) mark the class with the **abstract** keyword.
 - An abstract class can have both abstract and non-abstract methods.
 - If a class has even _one_ abstract method, the class must be marked abstract.
@@ -111,6 +120,7 @@
 - To invoke the superclass version of a method from a subclass that's overridden the method, use the **super** keyword. Example: <code><b>super</b>.runReport();</code>
 
 ### Chapter 9
+
 - Java has two areas of memory we care about: the Stack and the Heap.
 - Instance variables are variables declared inside a class but outside any method.
 - Local variables are variables declared inside a method or method parameter.
