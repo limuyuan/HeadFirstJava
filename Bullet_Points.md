@@ -100,23 +100,12 @@
 - Every class in Java is either a direct or indirect subclass of class **Object** (`java.lang.Object`).
 - Methods can be declared with Object arguments and/or return types.
 - You can call methods on an object _only_ if the methods are in the class (or interface) used as the _reference_ variable type, regardless of the actual _object_ type. So, a reference variable of type Object can be used only to call methods defined in class Object, regardless of the type of the object to which the reference refers.
-- A reference variable of type Object can't be assigned to any other reference type without a _cast_. A cast can be used to assign a reference variable of one type to a reference variable of a subtype, but at runtime the cast will fail if the object on the heap is NOT of a type compatible with the cast.
-
-Example:
-```java
-Dog d = (Dog) x.getObject(aDog);
-```  
-
+- A reference variable of type Object can't be assigned to any other reference type without a _cast_. A cast can be used to assign a reference variable of one type to a reference variable of a subtype, but at runtime the cast will fail if the object on the heap is NOT of a type compatible with the cast. Example: `Dog d = (Dog) x.getObject(aDog);`
 - All objects come out of an ArrayList<Object> as a type Object (meaning, they can be referenced only by an Object reference variable, unless you use a _cast_)
 - Multiple inheritance is not allowed in Java, because of the problems associated with the "Deadly Diamond of Death". That means you can extend only one class (i.e. you can have only one immediate superclass).
 - An interface is like a 100% pure abstract class. It defines _only_ abstract methods.
 - Create an interface using the **interface** keyword instead of the word **class**.
-- Implement an interface using the keyword **implements**  
-
-Example:  
-```java
-Dog implements Pet
-```
+- Implement an interface using the keyword **implements**. Example: `Dog implements Pet`
 - Your class can implement multiple interfaces.
 - A class that implements an interface _must_ implement all the methods of the interface, since ___all interface methods are implicitly public and abstract___.
 - To invoke the superclass version of a method from a subclass that's overridden the method, use the **super** keyword. Example: <code><b>super</b>.runReport();</code>
