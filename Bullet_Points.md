@@ -1,5 +1,4 @@
 # Head First Java Bullet Points
-
 ### Chapter 1
 - Statements end in a semicolon `;`
 - Code blocks are defined by a pair of curly braces `{}`
@@ -103,22 +102,18 @@
 - You can call methods on an object _only_ if the methods are in the class (or interface) used as the _reference_ variable type, regardless of the actual _object_ type. So, a reference variable of type Object can be used only to call methods defined in class Object, regardless of the type of the object to which the reference refers.
 - A reference variable of type Object can't be assigned to any other reference type without a _cast_. A cast can be used to assign a reference variable of one type to a reference variable of a subtype, but at runtime the cast will fail if the object on the heap is NOT of a type compatible with the cast.  
 Example:
-
 ```java
 Dog d = (Dog) x.getObject(aDog);
 ```
-
 - All objects come out of an ArrayList<Object> as a type Object (meaning, they can be referenced only by an Object reference variable, unless you use a _cast_)
 - Multiple inheritance is not allowed in Java, because of the problems associated with the "Deadly Diamond of Death". That means you can extend only one class (i.e. you can have only one immediate superclass).
 - An interface is like a 100% pure abstract class. It defines _only_ abstract methods.
 - Create an interface using the **interface** keyword instead of the word **class**.
 - Implement an interface using the keyword **implements**  
 Example:
-
 ```java
 Dog implements Pet
 ```
-
 - Your class can implement multiple interfaces.
 - A class that implements an interface _must_ implement all the methods of the interface, since ___all interface methods are implicitly public and abstract___.
 - To invoke the superclass version of a method from a subclass that's overridden the method, use the **super** keyword. Example: <code><b>super</b>.runReport();</code>
@@ -350,10 +345,10 @@ sock.getInputStream();
 - The `Collections.sort()` method sorts a list of Strings alphabetically.
 - With generics, you can create type-safe collections where more problems are caught at compile-time instead of runtime.
 - Without generics, the complier would happily let you put a Pumpkin into an `ArrayList` that was supposed to hold only Cat objects.
-- Think of "E" as a stand-in for "the type of element you want this collection to hold and return."(**E** is for **E** lement):  
+- Think of "E" as a stand-in for "the type of element you want this collection to hold and return."(**E** is for **E** lement):
 ```java
 public class ArrayList<E> extends AbstractList<E> implements List<E> ... {
-  public boolean add(E o)
+  public boolean add(E o) { }
   // more code
 }
 ```
@@ -374,3 +369,58 @@ public class ArrayList<E> extends AbstractList<E> implements List<E> ... {
 - So, if you override `equals()`, you **MUST** override `hashCode()`.
 - The default behavior of `hashCode()` is to generate a unique integer for each object on the heap. So if you don't override `hashCode()` in a class, no two objects of that type can **EVER** beconsidered equal.
 - The default behavor of `equals()` is to do an `==` comparison. In other words, to test whether the two references refer to a single object on the heap. So if you don't override `equals()` in a class, no two objects can **EVER** be considered equal since references to two different objects will always contain a different bit pattern. `a.equals(b)` must also mean that `a.hashCode() == b.hashCode()`. But `a.hashCode() == b.hashCode()` does **NOT** have to mean `a.equals(b)`
+
+
+### Chapter 17
+
+- Organize your project so that your source code and class files are not in the same directory.
+- A standard organization structure is to create a _project_ directory, and then put a _source_ directory and a _classes_ directory inside the project directory.
+- Organizing your classes into packages prevent naming collisions with other classes, if you prepend your reverse domain name on to the front of a class name.
+- To put a class in a package, put a package statement at the top of the source code file, before any import statements:
+```java
+package com.wickedlysmart;
+```
+- To be in a package, a class must be in a _directory structure that exactly matches the package structure_. For a class, `com.wickedlysmart.Foo`, the `Foo` class must be in a directory named _wickedlysmart_, which is in a directory named _com_.
+- To make your compiled class land in the correct package directory structure under the _classes_ directory, use the `-d` compiler flag:
+```sh
+% cd source
+% javac -d ../classes com/wickedlysmart/Foo.java
+```
+- To run your code, `cd` to the classes directory, and give the fully-qualified name of your class:
+```sh
+% cd classes
+% java com.wickedlysmart.Foo
+```
+- You can bundle your class into JAR(Java ARchive) files. JAR is based on the pkzip format.
+- You can make an executable JAR file by putting a manifest into the JAR that states with class has the `main()` method. To create a manifest file, make a text file with an entry like the following(for example):
+`Main-Class: com.wickedlysmart.Foo`
+- Be sure you hit the return key after typing the Main-Class line, or your manifest file may not work.
+- To create a JAR file, type: `jar -cvfm manifest.txt MyJar.jar com`
+- The entire package directory structure(and _only_ the directories matching the package) must be immediately inside the JAR file.
+- To run an executable JAR file, type: `java -jar MyJar.jar`
+
+
+### Chapter 18
+- An object on one heap cannot get a normal Java reference to an object on a different heap(which means running on a different JVM)
+- Java Remote Method Invocation(RMI) makes it _seem_ like you're calling a method on a remote object(i.e. an object in a different JVM), but you aren't
+- When a client calls a method on a remote object, the client is really calling a method on a _proxy_ of the remote object. The proxy is called a 'stub'.
+- A stub is a client helper object that takes care of the low-level networking details(sockets, streams, serialization, etc.) by packaging and sending method calls to the server.
+- To build a remote service(in other words, an object that a remote client can ultimately call methods on), you must start with a remote interface.
+- A remote interface must extend the `java.rmi.Remote` interface, and all methods must declare `RemoteException`.
+- Your remote service implements your remote interface.
+- Your remote service should extend `UnicastRemoteObject`(Technically there are other ways to create a remote object, but extending `UnicastRemoteObject` is the simplest).
+- Your remote service class must have a constructor, and the constructor must declare a `RemoteException`(because the superclass constructor declares one).
+- Your remote service must be instantiated, and the object registered with the RMI registry.
+- To register a remote service, use the static `Naming.rebind("Service Name", serviceInstantce);`
+- The RMI registry must be running on the same machine as the remote service, before you try to register a remote object with the RMI registry.
+- The client looks up your remote service using the static `Naming.lookup("rmi://MyHostName/ServiceName");`
+- Almost everything related to RMI can throw a `RemoteException`(checked by the compiler). This includes registering or looking up a service in the registry, and _all_ remote method calls from the client to the stub.
+- Servlets are Java classes that run entirely on(and/or within) an HTTP(web) server.
+- Servlets are useful for running code on the server as a result of client interaction with a web page. For example, if a client submits information in a web page form, the servlet can process the information, add it to a database, and send back a customized, confirmation response page.
+- To compile a servlet, you need the servlet packages which are in the servlets.jar file. The servlet classes are not part of the Java standard libraries, so you need to download the servlets.jar from java.sun.com or get them from a servlet-capable web server. (Note: the Servlet library is included with the Java 2 Enterprise Edition(J2EE))
+- To run a servlet, you must have a web server capable of running servlets, such as the Tomcat server from apache.org
+- Your servlet must be placed in a location that's specific to your particular web server, so you'll need to find that out before you try to run your servlets. If you have a web site hosted by an ISP that supports servlets, the ISP will tell you which directory to place your servlets in.
+- A typical servlet extends `HttpServlet` and overrides one or more servlet methods, such as `doGet()` or `doPost()`
+- The web server starts the servlet and calls the appropriate method(`doGet()`, etc.) based on the client's request.
+- The servlet can send back a response by getting a `PrintWriter` out put stream from the response parameter of the `doGet()` method.
+- The servlet 'writes' out an HTML page, complete with tags.
