@@ -110,6 +110,7 @@
 - A class that implements an interface _must_ implement all the methods of the interface, since ___all interface methods are implicitly public and abstract___.
 - To invoke the superclass version of a method from a subclass that's overridden the method, use the **super** keyword. Example: <code><b>super</b>.runReport();</code>
 
+### Chapter 9
 - Java has two areas of memory we care about: the Stack and the Heap.
 - Instance variables are variables declared inside a class but outside any method.
 - Local variables are variables declared inside a method or method parameter.
