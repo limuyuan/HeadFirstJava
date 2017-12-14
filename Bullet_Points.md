@@ -104,7 +104,8 @@
 Example:
 ```java
 Dog d = (Dog) x.getObject(aDog);
-```
+```  
+
 - All objects come out of an ArrayList<Object> as a type Object (meaning, they can be referenced only by an Object reference variable, unless you use a _cast_)
 - Multiple inheritance is not allowed in Java, because of the problems associated with the "Deadly Diamond of Death". That means you can extend only one class (i.e. you can have only one immediate superclass).
 - An interface is like a 100% pure abstract class. It defines _only_ abstract methods.
@@ -113,7 +114,9 @@ Dog d = (Dog) x.getObject(aDog);
 Example:
 ```java
 Dog implements Pet
-```
+```  
+
+
 - Your class can implement multiple interfaces.
 - A class that implements an interface _must_ implement all the methods of the interface, since ___all interface methods are implicitly public and abstract___.
 - To invoke the superclass version of a method from a subclass that's overridden the method, use the **super** keyword. Example: <code><b>super</b>.runReport();</code>
